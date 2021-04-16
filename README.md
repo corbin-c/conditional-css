@@ -32,4 +32,4 @@ get the default properties, otherwise the `to` keyframe will override them:
 All animatables properties can be changed conditionnally using this technique.
 
 The complete process can be seen in the [`style.css` file](./style.css) & the
-result is shown here: https://corbin-c.github.io/conditionnal-css/
+result is shown here: https://corbin-c.github.io/conditional-css/
