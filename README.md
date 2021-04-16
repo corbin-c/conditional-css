@@ -1,4 +1,4 @@
-# conditionnal-css
+# conditional-css
 
 This repo is just a demonstration of the possibility to perform boolean tests using
 CSS vars.
