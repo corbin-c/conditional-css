@@ -24,11 +24,12 @@ So the shorthand for this would be :
 `--boolean = min(1, max(var(--width) - var(--threshold), 0))`
 
 Then this value can be used to trigger animations states using the `step` property.
-When `--boolean` equals 0, the animation won't be triggered so the element will get the default properties, otherwise the `to` keyframe will override them:
+When `--boolean` equals 0, the animation won't be triggered so the element will
+get the default properties, otherwise the `to` keyframe will override them:
 
 `animation: element-if-true steps(var(--boolean)) forwards;`
 
 All animatables properties can be changed conditionnally using this technique.
 
-The complete process can be seen in the [`style.css` file](./style.css) & the result is
-shown here: https://corbin-c.github.io/conditionnal-css/
+The complete process can be seen in the [`style.css` file](./style.css) & the
+result is shown here: https://corbin-c.github.io/conditionnal-css/
