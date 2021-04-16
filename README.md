@@ -6,7 +6,7 @@ CSS vars.
 The idea comes from this stackoverflow answer: https://stackoverflow.com/a/64322555/8086209
 
 Sometimes you have one component that should behave differently based on its
-size (or its container's), nut CSS doesn't provide a way to handle this simply
+size (or its container's), but CSS doesn't provide a way to handle this simply
 (just like media queries to handle viewport size). The container query is
 supposed to be implemented soon, but as I write these lines, it's still an
 experimental feature, so this is a workaround.
