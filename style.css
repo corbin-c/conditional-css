@@ -1,0 +1,152 @@
+/* this whole stuff is taken from https://stackoverflow.com/a/64322555/8086209 */
+
+/* general styling */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Sans;
+  box-sizing: border-box;
+}
+html {
+  min-height: 100vh;
+}
+body {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: lavender;
+}
+header {
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+code {
+  font-family: monospace;
+}
+main {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  padding: 2rem;
+  background-color: lightcoral;
+  border-radius: 1rem;
+  --threshold: 50; /* this is the threshold for the test (unitless) */
+}
+/* here we define the vars on which we will perform our tests */ 
+section {
+  --width: 70; /* (unitless) */
+}
+aside {
+  --width: 30; /* (unitless) */
+}
+main > * {
+  /* here comes the magic: */
+  --boolean: min(1, max(var(--width) - var(--threshold), 0)); /* will return 1 if --width > --threshold, 0 otherwise */
+  animation: container-true steps(var(--boolean)) forwards; /* then we just apply the animation with steps(0||1) */
+  /* default values */
+  border-radius: 1rem;
+  width: calc(var(--width) * 1%); /* to convert non-unit value to percent */
+  flex: 0 1 auto;
+  order: 1;
+  background: none;
+  text-align: center;
+  font-size: .8rem;
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(1, 1fr);
+}
+main > * article {
+  /* these are the default values (cases when --width is inferior to --threshold) */
+  margin: .5rem;
+  padding: .5rem;
+  background: antiquewhite;
+  border-radius: 1rem;
+  border: .2rem solid black;
+  /* and the animation "to" state contains the value for --width > --threshold */
+  animation: article-true steps(var(--boolean)) forwards;
+}
+main > * h1 {
+  margin: .5rem;
+  animation: h1-true steps(var(--boolean)) forwards;
+}
+main > * p {
+  /* display: none; <-- we can't use this, because display is not animatable, so this is a workaround */
+  height: 0;
+  overflow: hidden;
+  animation: p-true steps(var(--boolean)) forwards;
+}
+main > * figure {
+  width: 75%;
+  height: 8rem;
+  margin: auto;
+  filter: grayscale(100%);
+  animation: figure-true steps(var(--boolean)) forwards;
+}
+main > * img {
+  width: 100%;
+  height: 100%;
+  object-position: middle;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+main > *::before {
+  position: absolute; 
+  top: -.8rem;
+  content: "aside";
+  display: block;
+  animation: before-true steps(var(--boolean)) forwards;
+}
+/* now the "animations" used to define the values for --width > --threshold */
+@keyframes container-true {
+  to {
+    flex: 1 0 auto;
+    order: 2;
+    background: blueviolet;
+    color: antiquewhite;
+    margin: .5rem;
+    padding: .5rem;
+    text-align: left;
+    font-size: 1.2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@keyframes figure-true {
+  to {
+    height: auto;
+    width: 100%;
+    margin-bottom: 1rem;
+    filter: grayscale(0%);
+  }
+}
+@keyframes before-true {
+  to {
+    content: "section";
+    text-align: right;
+    top: -1.6rem;
+    width: 100%;
+  }
+}
+@keyframes h1-true {
+  to {
+    color: darkblue;
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+  }
+}
+@keyframes article-true {
+  to {
+    background: none;
+    border-radius: 0;
+    border: 0px solid black;
+    border-bottom: .5rem solid darkblue;
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+  }
+}
+@keyframes p-true {
+  to {
+    height: auto;
+    overflow: auto;
+  }
+}
